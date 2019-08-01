@@ -11,7 +11,7 @@ function TodoItem(props) {
 
 	return (
 		<div>
-			<input type="checkbox" onChange={handleTodoItemStatusModified} />
+			<input type="checkbox" checked={props.todoItem.completed} onChange={handleTodoItemStatusModified} />
 			<span className={props.todoItem.completed ? 'text-strike' : null}>
 				{props.todoItem.name}
 			</span>

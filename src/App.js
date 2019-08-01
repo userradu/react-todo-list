@@ -1,13 +1,22 @@
 import React from 'react';
 import AddTodoItem from './add-todo-item/AddTodoItem'
 import TodoItemsList from './todo-items-list/TodoItemsList';
+import SearchTodoItems from './search-todo-items/SearchTodoItems';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { todoItems: [], currentId: 0 };
+    this.state = {
+      allTodoItems: [],
+      filteredTodoItems: [],
+      searchedText: '',
+      currentId: 0
+    };
     this.addTodoItem = this.addTodoItem.bind(this);
     this.handleTodoItemStatusModified = this.handleTodoItemStatusModified.bind(this);
+    this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
+    this.filterTodoItems = this.filterTodoItems.bind(this);
   }
 
   addTodoItem(name) {
@@ -16,14 +25,15 @@ class App extends React.Component {
       name: name,
       completed: false
     };
+
     this.setState({
-      todoItems: this.state.todoItems.concat(todoItem),
+      allTodoItems: this.state.allTodoItems.concat(todoItem),
       currentId: this.state.currentId + 1
-    });
+    }, this.filterTodoItems);
   }
 
   handleTodoItemStatusModified(todoItemData) {
-    const todoItems = this.state.todoItems.map((todoItem) => {
+    const allTodoItems = this.state.allTodoItems.map((todoItem) => {
       if (todoItem.id === todoItemData.id) {
         return Object.assign(todoItem, todoItemData);
       } else {
@@ -32,17 +42,39 @@ class App extends React.Component {
     });
 
     this.setState({
-      todoItems: todoItems
+      allTodoItems: allTodoItems
+    });
+  }
+
+  handleSearchInputChange(searchedText) {
+    this.setState({
+      searchedText: searchedText
+    }, this.filterTodoItems);
+  }
+
+  filterTodoItems() {
+    const flteredTodoItems = this.state.allTodoItems.filter(todoItem =>
+      todoItem.name.toLowerCase().indexOf(this.state.searchedText.toLowerCase()) > -1
+    );
+
+    this.setState({
+      filteredTodoItems: flteredTodoItems
     });
   }
 
   render() {
     return (
       <div className="App">
-        <AddTodoItem onAddTodoItem={this.addTodoItem}/>
-        <TodoItemsList 
-          todoItems={this.state.todoItems}
-          onTodoItemStatusModofied={this.handleTodoItemStatusModified}/>
+        <h4>React Todo List App</h4>
+        <SearchTodoItems
+          className="search-items-control"
+          onSearchInputChange={this.handleSearchInputChange} />
+
+        <AddTodoItem onAddTodoItem={this.addTodoItem} />
+
+        <TodoItemsList
+          todoItems={this.state.filteredTodoItems}
+          onTodoItemStatusModofied={this.handleTodoItemStatusModified} />
       </div>
     );
   }
