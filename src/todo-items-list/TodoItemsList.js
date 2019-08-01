@@ -7,7 +7,7 @@ function TodoItemsList(props) {
 		<TodoItem
 			key={todoItem.id}
 			todoItem={todoItem}
-			onTodoItemStatusModofied={props.onTodoItemStatusModofied} />
+			onTodoItemStatusModified={props.onTodoItemStatusModified} />
 	);
 
 	return (

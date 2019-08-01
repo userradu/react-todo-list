@@ -3,7 +3,7 @@ import './TodoItem.css';
 
 function TodoItem(props) {
 	function handleTodoItemStatusModified(event) {
-		props.onTodoItemStatusModofied({
+		props.onTodoItemStatusModified({
 			id: props.todoItem.id,
 			completed: event.target.checked
 		});

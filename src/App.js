@@ -74,7 +74,7 @@ class App extends React.Component {
 
         <TodoItemsList
           todoItems={this.state.filteredTodoItems}
-          onTodoItemStatusModofied={this.handleTodoItemStatusModified} />
+          onTodoItemStatusModified={this.handleTodoItemStatusModified} />
       </div>
     );
   }
