@@ -1,5 +1,5 @@
 import React from 'react';
-import StatusFilter from '../StatusFilter/StatusFilter';
+import StatusFilter from '../status-filter/StatusFilter';
 import './SearchTodoItems.css';
 
 class SearchTodoItems extends React.Component {
