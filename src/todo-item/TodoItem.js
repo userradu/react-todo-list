@@ -5,14 +5,17 @@ function TodoItem(props) {
 	function handleTodoItemStatusModified(event) {
 		props.onTodoItemStatusModified({
 			id: props.todoItem.id,
-			completed: event.target.checked
+			status: event.target.checked ? 'Complete' : 'Incomplete'
 		});
 	}
 
 	return (
 		<div>
-			<input type="checkbox" checked={props.todoItem.completed} onChange={handleTodoItemStatusModified} />
-			<span className={props.todoItem.completed ? 'text-strike' : null}>
+      <input
+        type="checkbox"
+        checked={props.todoItem.status === 'Complete'}
+        onChange={handleTodoItemStatusModified} />
+			<span className={props.todoItem.status === 'Complete' ? 'text-strike' : null}>
 				{props.todoItem.name}
 			</span>
 		</div>

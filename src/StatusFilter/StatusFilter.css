@@ -1,0 +1,14 @@
+.filter-option {
+  background-color: transparent;
+  border: none;
+  color: #428BCA;
+}
+
+.filter-option:hover {
+  cursor: pointer;
+}
+
+.filter-option.selected {
+  background-color: #428BCA;;
+  color: #fff;
+}

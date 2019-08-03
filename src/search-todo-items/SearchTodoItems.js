@@ -1,6 +1,10 @@
 import React from 'react';
+import StatusFilter from '../StatusFilter/StatusFilter';
+import './SearchTodoItems.css';
 
 class SearchTodoItems extends React.Component {
+    statusFilterOptions = ['All', 'Incomplete', 'Complete'];
+
     constructor(props) {
       super(props);
       this.state = {searchedText: ''};
@@ -16,6 +20,15 @@ class SearchTodoItems extends React.Component {
     }
 
     render() {
+      const statusFilterItems = this.statusFilterOptions.map((option) =>
+        <StatusFilter
+          key={option}
+          status={option}
+          currentStatus={this.props.statusFilter}
+          className="status-filter"
+          onStatusFilterChanged={this.props.onStatusFilterChanged}/>
+      );
+
       return (
         <div>
           <input
@@ -24,6 +37,8 @@ class SearchTodoItems extends React.Component {
             value={this.state.searchedText}
             className={this.props.className}
             onChange={this.handleSearchInputChange}/>
+
+            {statusFilterItems}
         </div>
       );
     }

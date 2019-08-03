@@ -11,25 +11,35 @@ class App extends React.Component {
       allTodoItems: [],
       filteredTodoItems: [],
       searchedText: '',
+      statusFilter: 'All',
       currentId: 0
     };
     this.addTodoItem = this.addTodoItem.bind(this);
     this.handleTodoItemStatusModified = this.handleTodoItemStatusModified.bind(this);
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
-    this.filterTodoItems = this.filterTodoItems.bind(this);
+    this.handleStatusFilterChanged = this.handleStatusFilterChanged.bind(this);
+    this.filterConditionsFulfilled = this.filterConditionsFulfilled.bind(this);
   }
 
   addTodoItem(name) {
     const todoItem = {
       id: this.state.currentId + 1,
       name: name,
-      completed: false
+      status: 'Incomplete'
     };
 
-    this.setState({
-      allTodoItems: this.state.allTodoItems.concat(todoItem),
-      currentId: this.state.currentId + 1
-    }, this.filterTodoItems);
+    if (this.filterConditionsFulfilled(todoItem, this.state.searchedText, this.state.statusFilter)) {
+      this.setState({
+        allTodoItems: this.state.allTodoItems.concat(todoItem),
+        filteredTodoItems: this.state.filteredTodoItems.concat(todoItem),
+        currentId: this.state.currentId + 1
+      });
+    } else {
+      this.setState({
+        allTodoItems: this.state.allTodoItems.concat(todoItem),
+        currentId: this.state.currentId + 1
+      });
+    }
   }
 
   handleTodoItemStatusModified(todoItemData) {
@@ -47,18 +57,31 @@ class App extends React.Component {
   }
 
   handleSearchInputChange(searchedText) {
-    this.setState({
-      searchedText: searchedText
-    }, this.filterTodoItems);
-  }
-
-  filterTodoItems() {
-    const flteredTodoItems = this.state.allTodoItems.filter(todoItem =>
-      todoItem.name.toLowerCase().indexOf(this.state.searchedText.toLowerCase()) > -1
+    const filteredTodoItems = this.state.allTodoItems.filter(todoItem =>
+      this.filterConditionsFulfilled(todoItem, searchedText, this.state.statusFilter)
     );
 
     this.setState({
-      filteredTodoItems: flteredTodoItems
+      searchedText: searchedText,
+      filteredTodoItems: filteredTodoItems
+    });
+  }
+
+  filterConditionsFulfilled(todoItem, searchedText, status) {
+    const includesSearchedText = todoItem.name.toLowerCase().indexOf(searchedText.toLowerCase()) > -1;
+    const hasSelectedStatus = status === 'All' || todoItem.status === status;
+
+    return includesSearchedText && hasSelectedStatus;
+  }
+
+  handleStatusFilterChanged(status) {
+    const filteredTodoItems = this.state.allTodoItems.filter(todoItem =>
+      this.filterConditionsFulfilled(todoItem, this.state.searchedText, status)
+    );
+
+    this.setState({
+      statusFilter: status,
+      filteredTodoItems: filteredTodoItems
     });
   }
 
@@ -68,7 +91,9 @@ class App extends React.Component {
         <h4>React Todo List App</h4>
         <SearchTodoItems
           className="search-items-control"
-          onSearchInputChange={this.handleSearchInputChange} />
+          onSearchInputChange={this.handleSearchInputChange}
+          statusFilter={this.state.statusFilter}
+          onStatusFilterChanged={this.handleStatusFilterChanged} />
 
         <AddTodoItem onAddTodoItem={this.addTodoItem} />
 
