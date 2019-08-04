@@ -30,13 +30,13 @@ class App extends React.Component {
 
     if (this.filterConditionsFulfilled(todoItem, this.state.searchedText, this.state.statusFilter)) {
       this.setState({
-        allTodoItems: this.state.allTodoItems.concat(todoItem),
-        filteredTodoItems: this.state.filteredTodoItems.concat(todoItem),
+        allTodoItems: [...this.state.allTodoItems, todoItem],
+        filteredTodoItems: [...this.state.filteredTodoItems, todoItem],
         currentId: this.state.currentId + 1
       });
     } else {
       this.setState({
-        allTodoItems: this.state.allTodoItems.concat(todoItem),
+        allTodoItems: [...this.state.allTodoItems, todoItem],
         currentId: this.state.currentId + 1
       });
     }
@@ -45,14 +45,19 @@ class App extends React.Component {
   handleTodoItemStatusModified(todoItemData) {
     const allTodoItems = this.state.allTodoItems.map((todoItem) => {
       if (todoItem.id === todoItemData.id) {
-        return Object.assign(todoItem, todoItemData);
+        return {...todoItem, ...todoItemData};
       } else {
         return todoItem;
       }
     });
 
+    const filteredTodoItems = allTodoItems.filter(todoItem =>
+      this.filterConditionsFulfilled(todoItem, this.state.searchedText, this.state.statusFilter)
+    );
+
     this.setState({
-      allTodoItems: allTodoItems
+      allTodoItems: allTodoItems,
+      filteredTodoItems: filteredTodoItems
     });
   }
 
