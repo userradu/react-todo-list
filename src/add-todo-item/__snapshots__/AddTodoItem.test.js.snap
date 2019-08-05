@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddTodoItem renders correctly 1`] = `
+<div
+  className="add-todo-section"
+>
+  <input
+    onChange={[Function]}
+    type="text"
+    value=""
+  />
+  <button
+    onClick={[Function]}
+  >
+    Add
+  </button>
+</div>
+`;
