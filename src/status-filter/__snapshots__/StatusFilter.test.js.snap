@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatusFilter renders correctly 1`] = `
+<span
+  className="customClass"
+>
+  <button
+    className="filter-option selected"
+    onClick={[Function]}
+  >
+    All
+  </button>
+</span>
+`;
