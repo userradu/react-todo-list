@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchTodoItems renders correctly 1`] = `
+<div>
+  <input
+    className="className"
+    onChange={[Function]}
+    placeholder="Search"
+    type="text"
+    value=""
+  />
+  <span
+    className="status-filter"
+  >
+    <button
+      className="filter-option selected"
+      onClick={[Function]}
+    >
+      All
+    </button>
+  </span>
+  <span
+    className="status-filter"
+  >
+    <button
+      className="filter-option"
+      onClick={[Function]}
+    >
+      Incomplete
+    </button>
+  </span>
+  <span
+    className="status-filter"
+  >
+    <button
+      className="filter-option"
+      onClick={[Function]}
+    >
+      Complete
+    </button>
+  </span>
+</div>
+`;
