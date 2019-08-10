@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import TodoItem from './TodoItem';
 
-describe('TodoItem', () => {
+describe('<TodoItem />', () => {
 
   it('renders correctly', () => {
     const todoItem = {

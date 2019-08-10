@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SearchTodoItems renders correctly 1`] = `
+exports[`<SearchTodoItems /> renders correctly 1`] = `
 <div>
   <input
     className="className"

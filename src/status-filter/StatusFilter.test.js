@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import StatusFilter from './StatusFilter';
 
-describe('StatusFilter', () => {
+describe('<StatusFilter />', () => {
 
   it('renders correctly', () => {
     const tree = renderer.create(

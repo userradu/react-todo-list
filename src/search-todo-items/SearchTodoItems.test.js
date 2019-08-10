@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import SearchTodoItems from './SearchTodoItems';
 import StatusFilter from '../status-filter/StatusFilter';
 
-describe('SearchTodoItems', () => {
+describe('<SearchTodoItems />', () => {
 
   it('renders correctly', () => {
     const tree = renderer

@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-describe('AddTodoItem', () => {
+describe('<AddTodoItem />', () => {
 
   it('renders correctly', () => {
     const tree = renderer
